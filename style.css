@@ -4,20 +4,20 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #87CEEB;
+    background-color: #326d8f;
+    font-family:'Orbitron', sans-serif;
+    /* background-color: #87CEEB; */
 }
 #grid {
-    width: 720px;
-    height: 720px;
-    border: solid blue;
+    width: 760px;
+    height: 760px;
     margin-top: 25px;
-
     display: flex;
     flex-wrap: wrap;
 
 }
 #controllers {
-    width: 720px;
+    width: 760px;
     height: 50px;
     display: flex;
     justify-content: end;
@@ -26,14 +26,12 @@ body {
 #timer {
     width: 120px;
     font-size: 40px;
-    font-family:'Orbitron', sans-serif;
     background-color: #b3dae9;
     color: #5db3db;
     display: flex;
     justify-content: space-around;
+    border-radius: 5px;
 }
 .cell {
-    background-color: blue;
-    border: solid red;
     box-sizing: border-box;
 } 
