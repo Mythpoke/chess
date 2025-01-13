@@ -1,0 +1,39 @@
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #87CEEB;
+}
+#grid {
+    width: 720px;
+    height: 720px;
+    border: solid blue;
+    margin-top: 25px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+}
+#controllers {
+    width: 720px;
+    height: 50px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+#timer {
+    width: 120px;
+    font-size: 40px;
+    font-family:'Orbitron', sans-serif;
+    background-color: #b3dae9;
+    color: #5db3db;
+    display: flex;
+    justify-content: space-around;
+}
+.cell {
+    background-color: blue;
+    border: solid red;
+    box-sizing: border-box;
+} 
