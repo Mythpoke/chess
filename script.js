@@ -1,4 +1,6 @@
 const grid = document.querySelector("#grid");
+
+
 let cellSize = 95;
 let cellNumber = 64;
 let toggle = true;
@@ -29,9 +31,6 @@ for(let i = 0; i < 64; i++) {
         cell.appendChild(charOne);
         cell.appendChild(charTwo);
         cell.style.display = "flex";
-        // cell.style.flexDirection = "column";
-        // cell.style.alignItems = "center"
-        // cell.style.justifyContent = "space-between"
         cell.style.padding = `5px`;
         cell.style.gap = "60px";
         charTwo.style.marginTop = "65px"
@@ -51,6 +50,8 @@ for(let i = 0; i < 64; i++) {
     else if(i == 7) cell.style.borderRadius = `0 5px 0 0`;
     else if(i == 56) cell.style.borderRadius = `0 0 0 5px`;
     else if(i == 63) cell.style.borderRadius = `0 0 5px 0`;
+
+    
 
     if(i == 7 || i == 15 || i == 23 || i == 31 || i == 39 || i == 47 || i == 55) {
         grid.appendChild(cell);
