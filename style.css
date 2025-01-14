@@ -34,4 +34,17 @@ body {
 }
 .cell {
     box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
 } 
+
+img {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+
+    margin: 0;
+    padding: 0;
+}
