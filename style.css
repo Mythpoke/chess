@@ -6,7 +6,6 @@ body {
     align-items: center;
     background-color: #326d8f;
     font-family:'Orbitron', sans-serif;
-    /* background-color: #87CEEB; */
 }
 #grid {
     width: 760px;
@@ -20,31 +19,49 @@ body {
     width: 760px;
     height: 50px;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
 }
 #timer {
     width: 120px;
-    font-size: 40px;
+    font-size: 35px;
     background-color: #b3dae9;
     color: #5db3db;
     display: flex;
     justify-content: space-around;
     border-radius: 5px;
 }
-.cell {
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
-} 
+#player {
+    font-size: 35px;
+    width: 150px;
+    height: 45px;
+    color: #5db3db;
+    background-color: #b3dae9;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+}
+.cell pre {
+    position: absolute;
+    top: 0; /* Adjust as needed */
+    left: 0; /* Adjust as needed */
+    z-index: 1; /* Keep the characters under the images */
+    margin: 0;
+    padding: 70px 80px;
+    font-weight: bold;
+}
 
 img {
     position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Align perfectly center */
+    z-index: 2; /* Ensure images are above characters */
+}
 
-    margin: 0;
-    padding: 0;
+.cell {
+    position: relative; /* Make the cell a positioning context */
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: bold;
 }

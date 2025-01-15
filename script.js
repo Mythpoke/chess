@@ -47,52 +47,38 @@ for(let i = 0; i < 64; i++) {
     cell.classList.add("cell");
     cell.style.height = `${cellSize}px`;
     cell.style.width = `${cellSize}px`;
-    // if(i >= 56) {
-    //     cell.innerHTML = `<pre>&#${ascii};<pre>`;
-    //     cell.style.padding = `50px 0 0px 75px`;
-    //     ascii++;
-    // }
-    // if(i % 8 == 0) {
-    //     cell.style.padding = "5px"
-    //     cell.textContent = counter;
-    //     counter--;
-    // }
-    // if( i == 56) {
-    //     cell.textContent = "";
-    //     const charOne = document.createElement("div");
-    //     const charTwo = document.createElement("div");
-    //     charOne.style.zIndex = 1;
-    //     charTwo.style.zIndex = 1;
-    //     charOne.style.position = 'relative';
-    //     charTwo.style.position = 'relative';
-    //     charOne.textContent = 1;
-    //     charTwo.textContent = "a";
-    //     cell.appendChild(charOne);
-    //     cell.appendChild(charTwo);
-    //     cell.style.display = "flex";
-    //     cell.style.padding = `5px`;
-    //     cell.style.gap = "60px";
-    //     charTwo.style.marginTop = "65px"
-
-    // }
-    if(toggle) {
-        cell.style.backgroundColor = "#F0FFFF"; 
-        cell.style.color = "#87CEEB"; 
+    if(i >= 56) {
+        cell.innerHTML = `<pre>&#${ascii};<pre>`;
+        // cell.style.padding = `50px 0 0px 75px`;
+        ascii++;
     }
-    else {
-        cell.style.backgroundColor = "#87CEEB";
-        cell.style.color = "#F0FFFF"; 
+    if(i % 8 == 0) {
+        cell.style.padding = "5px"
+        cell.textContent = counter;
+        counter--;
     }
 
-    cell.style.fontSize = "20px";
-    if(i == 0) cell.style.borderRadius = `5px 0 0 0`;
-    else if(i == 7) cell.style.borderRadius = `0 5px 0 0`;
-    else if(i == 56) cell.style.borderRadius = `0 0 0 5px`;
-    else if(i == 63) cell.style.borderRadius = `0 0 5px 0`;
+    if( i == 56) {
+        cell.textContent = "";
+        const numberOne = document.createElement("div");
+        const charA = document.createElement("div");
+        numberOne.classList.add("char");
+        charA.classList.add("char");
+
+        numberOne.style.position = 'absolute';
+        charA.style.position = 'absolute';
+        numberOne.textContent = 1;
+        charA.textContent = "a";
+        cell.appendChild(numberOne);
+        cell.appendChild(charA);
+
+        charA.style.marginTop = "65px"
+        charA.style.marginLeft = "75px"
+    }
 
     if( (i >= 0 && i <= 15) || (i >= 48 && i <= 63) ) {
         const img = document.createElement('img');
-        img.src = images[imageCounter];
+        img.src = images[imageCounter];                                     //wgrywa zdjecia figur szachowych
         imageCounter++;
 
         img.style.height = '90px';
@@ -100,10 +86,25 @@ for(let i = 0; i < 64; i++) {
         cell.appendChild(img);
     }
 
-    if(i == 7 || i == 15 || i == 23 || i == 31 || i == 39 || i == 47 || i == 55) {
-        grid.appendChild(cell);
-        continue;
+    if(toggle) {
+        cell.style.backgroundColor = "#F0FFFF"; 
+        cell.style.color = "#87CEEB"; 
+    }                                                                       //koloruje szachownice
+    else {
+        cell.style.backgroundColor = "#87CEEB";
+        cell.style.color = "#F0FFFF"; 
     }
-    toggle = !toggle;
-    grid.appendChild(cell);
+
+    if( i == 7 || i == 15 || i == 23 || i == 31 || i == 39 || i == 47 || i == 55 || i == 63) {
+        grid.appendChild(cell);                                             //pozycjonuje szachownice;
+    }
+    else {
+        toggle = !toggle;
+        grid.appendChild(cell);
+    }
+
+    if(i == 0) cell.style.borderRadius = `5px 0 0 0`;
+    else if(i == 7) cell.style.borderRadius = `0 5px 0 0`;                  //Zaakragla krawedzie
+    else if(i == 56) cell.style.borderRadius = `0 0 0 5px`;
+    else if(i == 63) cell.style.borderRadius = `0 0 5px 0`;
 }
