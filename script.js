@@ -67,7 +67,7 @@ function drawBoard() {
                 cell.innerHTML = `<pre>&#${ascii};<pre>`;
                 ascii++;
             }
-            if(board[i][j] < 20) {                                                       //wspolrzedne liczbowe
+            if(j == 0) {                                                       //wspolrzedne liczbowe
                 cell.style.padding = "5px"
                 cell.textContent = verticalCoordsCounter;
                 verticalCoordsCounter--;
