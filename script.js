@@ -117,11 +117,11 @@ function drawBoard() {
                 toggle = !toggle;
                 grid.appendChild(cell);
             }
-        
-            if(i == 0 && j == 0) cell.style.borderRadius = `5px 0 0 0`;
-            else if(i == 0 && j == 7) cell.style.borderRadius = `0 5px 0 0`;                  //Zaokragla krawedzie
-            else if(i == 7 && j == 0) cell.style.borderRadius = `0 0 0 5px`;
-            else if(i == 7 && j == 7) cell.style.borderRadius = `0 0 5px 0`;
+            
+            cell.style.borderRadius = i == 0 && j == 0 ? `5px 0 0 0`:
+             i == 0 && j == 7 ? `0 5px 0 0`:
+              i == 7 && j == 0 ? `0 0 0 5px`:                                        //Zaokragla krawedzie
+               i == 7 && j == 7 ? `0 0 5px 0`: false;
         }
         
 
