@@ -48,7 +48,6 @@ function drawBoard() {
     ]
     
     let cellSize = 95;
-    let cellNumber = 64;
     let toggle = true;
     let ascii = 97;
     let verticalCoordsCounter = 8;
@@ -59,10 +58,15 @@ function drawBoard() {
         for(let j = 0; j < board.length; j++) {
             const cell = document.createElement("div");                           //tworzenie pól
             cell.classList.add("cell");
-            console.log(cell)
             cell.style.height = `${cellSize}px`;
             cell.style.width = `${cellSize}px`;
             cell.dataset.index = board[i][j];
+
+            cell.addEventListener('drop', (e)=> {
+                e.preventDefault();
+                const data = e.dataTransfer.getData('text/plain');
+                cell.textContent = data;
+            })
             if(i == 7) {                                                          //wspolrzedne alfabetyczne
                 cell.innerHTML = `<pre>&#${ascii};<pre>`;
                 ascii++;
@@ -95,9 +99,10 @@ function drawBoard() {
                 const img = document.createElement('img');
                 img.src = images[piecesCounter];                                     //wgrywa zdjecia figur szachowych
                 piecesCounter++;
-        
-                img.style.height = '90px';
-                img.style.width = '90px';
+                img.dataset.index = board[i][j];
+                img.id = 'chess-piece' + piecesCounter;
+                img.draggable = 'true';
+
                 cell.appendChild(img);
             }
         
@@ -126,6 +131,58 @@ function drawBoard() {
         
 
     }
+    const handleDragStart = (e) => {
+        if (e.target.tagName === 'IMG') {
+          e.dataTransfer.setData('text', e.target.id); // Przechowujemy id obrazka
+        }
+      };
+      
+      const handleDragOver = (e) => {
+        if (e.target.classList.contains('cell')) {
+          e.preventDefault(); // Umożliwiamy zrzucenie
+          e.target.classList.add('hover');
+        }
+      };
+      
+      const handleDragLeave = (e) => {
+        if (e.target.classList.contains('cell')) {
+          e.target.classList.remove('hover');
+        }
+      };
+      
+      const handleDrop = (e) => {
+        if (e.target.classList.contains('cell')) {
+          e.preventDefault(); // Zapobiegamy domyślnym działaniom
+          const imgId = e.dataTransfer.getData('text'); // Pobieramy id przeciąganego obrazka
+          const draggedImg = document.getElementById(imgId);
+      
+          if (draggedImg) {
+            // Dodajemy placeholder do poprzedniego rodzica
+            const prevParent = draggedImg.parentElement;
+            if (prevParent && prevParent.classList.contains('cell')) {
+              prevParent.innerHTML = '<span class="placeholder"></span>';
+            }
+      
+            // Usuwamy placeholder z bieżącej komórki
+            e.target.innerHTML = '';
+      
+            // Dodajemy obrazek do nowej komórki
+            e.target.appendChild(draggedImg);
+          }
+      
+          e.target.classList.remove('hover');
+        }
+      };
+      
+      // Przypisujemy funkcje do zdarzeń
+      grid.addEventListener('dragstart', handleDragStart);
+      grid.addEventListener('dragover', handleDragOver);
+      grid.addEventListener('dragleave', handleDragLeave);
+      grid.addEventListener('drop', handleDrop);
+      
+      
+      
+      
 
 }
 
