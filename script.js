@@ -62,37 +62,20 @@ function drawBoard() {
             cell.style.width = `${cellSize}px`;
             cell.dataset.index = board[i][j];
 
-            cell.addEventListener('drop', (e)=> {
-                e.preventDefault();
-                const data = e.dataTransfer.getData('text/plain');
-                cell.textContent = data;
-            })
-            if(i == 7) {                                                          //wspolrzedne alfabetyczne
-                cell.innerHTML = `<pre>&#${ascii};<pre>`;
+            if(i == 7) {     
+                const numeric = document.createElement('div');                                                     //wspolrzedne alfabetyczne
+                numeric.textContent = String.fromCharCode(ascii);
+                numeric.classList.add("numeric");
+                cell.appendChild(numeric);
                 ascii++;
             }
-            if(j == 0) {                                                       //wspolrzedne liczbowe
-                cell.style.padding = "5px"
-                cell.textContent = verticalCoordsCounter;
+            if(j == 0) {       
+                const alfabetic = document.createElement("div");
+                alfabetic.textContent = verticalCoordsCounter;
+                alfabetic.classList.add("alfabetic");
+                cell.appendChild(alfabetic);                                              //wspolrzedne liczbowe
                 verticalCoordsCounter--;
-            }
-        
-            if(i == 7 && j == 0) {
-                cell.textContent = "";                                             //Dodanie i ułożenie wspolrzednej a1
-                const numberOne = document.createElement("div");
-                const charA = document.createElement("div");
-                numberOne.classList.add("char");
-                charA.classList.add("char");
-        
-                numberOne.style.position = 'absolute';
-                charA.style.position = 'absolute';
-                numberOne.textContent = 1;
-                charA.textContent = "a";
-                cell.appendChild(numberOne);
-                cell.appendChild(charA);
-        
-                charA.style.marginTop = "65px"                          
-                charA.style.marginLeft = "75px"
+
             }
         
             if(i == 0 || i == 1 || i == 6 || i == 7) {
@@ -141,13 +124,16 @@ function drawBoard() {
         if (e.target.classList.contains('cell')) {
           e.preventDefault(); // Umożliwiamy zrzucenie
           e.target.classList.add('hover');
+          e.target.style.boxShadow = "0 0 30px 15px blue";
         }
       };
       
       const handleDragLeave = (e) => {
+        const imgId = e.dataTransfer.getData('text');
         if (e.target.classList.contains('cell')) {
           e.target.classList.remove('hover');
         }
+        e.target.style.boxShadow = "none";
       };
       
       const handleDrop = (e) => {
@@ -157,21 +143,18 @@ function drawBoard() {
           const draggedImg = document.getElementById(imgId);
       
           if (draggedImg) {
-            // Dodajemy placeholder do poprzedniego rodzica
-            const prevParent = draggedImg.parentElement;
-            if (prevParent && prevParent.classList.contains('cell')) {
-              prevParent.innerHTML = '<span class="placeholder"></span>';
-            }
-      
             // Usuwamy placeholder z bieżącej komórki
             e.target.innerHTML = '';
       
             // Dodajemy obrazek do nowej komórki
             e.target.appendChild(draggedImg);
           }
+          console.log()
       
           e.target.classList.remove('hover');
+          console.log(e.target.dataset.index);
         }
+        e.target.style.boxShadow = "none";
       };
       
       // Przypisujemy funkcje do zdarzeń
